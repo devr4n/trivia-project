@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('number_of_questions');
             $table->string('difficulty');
             $table->string('type');
+            $table->string('question_link')->nullable();
             $table->timestamps();
         });
     }

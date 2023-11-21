@@ -33,6 +33,14 @@ class TriviaController extends Controller
                 ],
             ]);
 
+            $apiLink = 'https://opentdb.com/api.php?' . http_build_query([
+                    'amount' => $validatedData['number_of_questions'],
+                    'difficulty' => $validatedData['difficulty'],
+                    'type' => $validatedData['type'],
+                ]);
+
+            $validatedData['question_link'] = $apiLink;
+
             $triviaData = json_decode($response->getBody(), true);
 
             // Remove "Entertainment: Video Games" from categories

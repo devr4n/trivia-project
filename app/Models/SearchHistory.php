@@ -12,5 +12,6 @@ class SearchHistory extends Model
         'email',
         'number_of_questions',
         'difficulty',
-        'type',];
+        'type',
+        'question_link',];
 }
