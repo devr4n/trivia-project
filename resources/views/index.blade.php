@@ -17,6 +17,12 @@
 
     <hr>
 
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     <form action="{{ route('store') }}" method="post">
         @csrf
 

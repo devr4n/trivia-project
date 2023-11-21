@@ -61,7 +61,7 @@ class TriviaController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Error while storing data: ' . $e->getMessage());
-            return view('list')->with('error', 'Error while storing data');
+            return view('index')->with('message', 'Error while storing data');
         }
     }
 

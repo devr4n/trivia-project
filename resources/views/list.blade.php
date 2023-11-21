@@ -19,7 +19,8 @@
             @foreach ($filteredTrivia as $index => $question)
                 <div class="card mt-3 question-card @if($index > 0) d-none @endif" data-question-index="{{ $index }}">
                     <div class="card-body">
-                        <h5 class="card-title">Question {{ $index + 1 }}</h5>
+                        <h5 class="card-title text-primary">Question {{ $index + 1 }}</h5>
+                        <h6 class="card-title">Category : <i class="text-primary">{{ htmlspecialchars_decode($question['category']) }}</i></h6>
                         <p class="card-text">{{ htmlspecialchars_decode($question['question']) }}</p>
                         <form class="question-form">
                             @foreach ($question['incorrect_answers'] as $answer)
@@ -46,6 +47,7 @@
             </div>
         </div>
         <button id="submit-btn" class="btn btn-primary" onclick="nextQuestion()">Submit & Next</button>
+        <a id="finish-btn" class="btn btn-primary" href="{{ route('index') }}" onclick="indexPage()" hidden>Finish Quiz</a>
     </div>
 </div>
 </div>
@@ -54,6 +56,15 @@
     let currentQuestion = 0;
     let cards = document.querySelectorAll('.question-card');
     const answers = [];
+
+    // Toggle buttons
+    let btnToggle = () => {
+        let submitBtn = document.getElementById("submit-btn");
+        let finishBtn = document.getElementById("finish-btn");
+
+        submitBtn.hidden = !submitBtn.hidden;
+        finishBtn.hidden = !finishBtn.hidden;
+    };
 
     function showQuestion(index) {
         cards.forEach((card, i) => {
@@ -79,6 +90,7 @@
             showQuestion(currentQuestion);
         } else {
             alert("Quiz completed!");
+            btnToggle();
         }
     }
 
