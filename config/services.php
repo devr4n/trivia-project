@@ -20,7 +20,7 @@ return [
     ],
 
     'opentdb' => [
-        'api_url' => env('OPENTDB_API_URL', 'https://opentdb.com/api.php'),
+        'api_url' => env('OPENTDB_API_URL', 'https://opentdb.com/api.php?'),
     ],
 
 ];
