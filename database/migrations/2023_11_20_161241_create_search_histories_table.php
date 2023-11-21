@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('search_history', function (Blueprint $table) {
+        Schema::create('search_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('full_name');
             $table->string('email');

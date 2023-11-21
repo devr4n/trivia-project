@@ -23,14 +23,14 @@
                         <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">Question {{ $index + 1 }}</h5>
-                                <p class="card-text">{{ $question['question'] }}</p>
+                                <p class="card-text">{{ htmlspecialchars_decode($question['question']) }}</p>
                                 <form>
                                     @foreach ($question['incorrect_answers'] as $answer)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="answer_{{ $index }}"
-                                                   id="answer_{{ $index }}_{{ $loop->index }}" value="{{ $answer }}">
+                                                   id="answer_{{ $index }}_{{ $loop->iteration }}" value="{{ $answer }}">
                                             <label class="form-check-label"
-                                                   for="answer_{{ $index }}_{{ $loop->index }}">{{ $answer }}
+                                                   for="answer_{{ $index }}_{{ $loop->iteration }}">{{ $answer }}
                                             </label>
                                         </div>
                                     @endforeach
@@ -46,10 +46,10 @@
                             </div>
                         </div>
                     @endforeach
+
                 </div>
 
-
-                <button id="next-btn" class="btn btn-primary">Next</button>
+                <button id="submit-btn" class="btn btn-primary">Submit</button>
 
                 <div id="user-answers-container" class="mt-3">
                 </div>

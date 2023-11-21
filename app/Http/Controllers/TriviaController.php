@@ -3,29 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\SearchHistory;
+use Exception;
 use Illuminate\Routing\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\TriviaRequest;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class TriviaController extends Controller
 {
-    public function store(Request $request): string
+    public function store(TriviaRequest $request): string
     {
         try {
             $srcHistory = new SearchHistory();
-
-            // Validation
-            $validatedData = $request->validate([
-                'full_name' => 'required',
-                'email' => 'required|email',
-                'number_of_questions' => 'required|integer|max:50',
-                'difficulty' => 'required|in:easy,medium,hard',
-                'type' => 'required|in:multiple,boolean',
-            ]);
+            $validatedData = $request->validated();
 
             // GET request 2 API
             $client = new Client();
-            $response = $client->request('GET', 'https://opentdb.com/api.php', [
+            $response = $client->request('GET', config('services.opentdb.api_url'), [
                 'query' => [
                     'amount' => $validatedData['number_of_questions'],
                     'difficulty' => $validatedData['difficulty'],
@@ -33,7 +29,7 @@ class TriviaController extends Controller
                 ],
             ]);
 
-            $apiLink = 'https://opentdb.com/api.php?' . http_build_query([
+            $apiLink = config('services.opentdb.api_url') . http_build_query([
                     'amount' => $validatedData['number_of_questions'],
                     'difficulty' => $validatedData['difficulty'],
                     'type' => $validatedData['type'],
@@ -55,12 +51,17 @@ class TriviaController extends Controller
 
             // Store in the database
             $srcHistory->fill($validatedData);
+            DB::beginTransaction();
             $srcHistory->save();
+            DB::commit();
 
-            return view('list', ['filteredTrivia' => $filteredTrivia])->with('success', 'Data is successfully added');
+            return view('list', ['filteredTrivia' => $filteredTrivia])
+                ->with('success', 'Data is successfully added');
 
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error while storing data: ' . $e->getMessage());
+            return view('list')->with('error', 'Error while storing data');
         }
     }
 

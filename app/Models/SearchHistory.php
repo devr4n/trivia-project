@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SearchHistory extends Model
 {
-    protected $table= 'search_history';
+    protected $table= 'search_histories';
     protected $fillable = [
         'full_name',
         'email',
