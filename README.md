@@ -30,3 +30,39 @@ php artisan migrate
 ```sh
 php artisan serve
 ```
+
+### Code Principles
+**Avoiding Complexity &  Flexibility**
+- This project was designed in a simple and understandable structure by avoiding over-engineering due to its small scale and minimal solutions were used in line with the needs.
+- The project can also be developed by using Service Providers. It is not used for simplicity.
+
+**Test Driven Development (TDD)**
+- Feature tests were used to test the basic functionality of the project, a user scenario was created.
+- To run the test, you can enter the project location and use the `php artisan test` command from the terminal.
+
+
+**Single Controller**
+- Single controller is used in the project. This approach makes the code simpler and easier to manage. More than one controller can be used in big projects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
