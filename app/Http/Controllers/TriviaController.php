@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SearchHistory;
 use Exception;
+use http\Env\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\TriviaRequest;
 use GuzzleHttp\Client;

@@ -15,13 +15,17 @@
         <li><i class="text-danger"> Please do not leave fields marked with * blank. </i></li>
     </ul>
 
-    <hr>
-
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
+
+    <hr>
 
     <form action="{{ route('store') }}" method="post">
         @csrf
