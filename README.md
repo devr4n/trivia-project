@@ -1,10 +1,11 @@
 # Trivia Project
-> This project is an interview project for a Full Stack PHP Web Developer position.
+> It is a simple project using api from [Open Trivia Database](https://opentdb.com/).
+> Simple bootstrap elements are used in the project and unit test is created for test the project.
 
 ### Required Php & Laravel
 
 - Php : 8.1
-- Laravel Framework : 10.32.1
+- Laravel Framework : 10
 
 ## Installation
 > Make sure you have installed the required Php and Laravel versions.
@@ -43,26 +44,4 @@ php artisan serve
 
 **Single Controller**
 - Single controller is used in the project. This approach makes the code simpler and easier to manage. More than one controller can be used in big projects.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
